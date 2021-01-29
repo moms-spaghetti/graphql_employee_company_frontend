@@ -2,6 +2,7 @@ import React from "react";
 
 //components
 import EmployeesTable from "./components/EmployeesTable";
+import AddEmployee from "./components/AddEmployee";
 
 function App() {
   return (
@@ -12,16 +13,17 @@ function App() {
         Uses GraphQL and Apollo to retrieve and delete data from a backend
         server connected to a mongodb database. Deletion is currently using
         cache updates to remove deleted items from the UI.
-        <p>
-          <a
-            href="https://moms-spaghetti-graphql-empcomp.herokuapp.com/graphql"
-            alt="link to graphql"
-          >
-            Access the GraphiQL interface here to add data
-          </a>
-        </p>
+      </p>
+      <p>
+        <a
+          href="https://moms-spaghetti-graphql-empcomp.herokuapp.com/graphql"
+          alt="link to graphql"
+        >
+          Access the GraphiQL interface here to add data
+        </a>
       </p>
       <EmployeesTable />
+      <AddEmployee />
     </div>
   );
 }
