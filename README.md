@@ -24,8 +24,8 @@ I originally wrote this using json-server during testing to answer api calls for
 
 (29.01.21)
 
-- implemented add employee form
-- implemented cache update when adding user
+- added employees and companies form
+- added cache updates for users and companies
 
 <br/>
 
