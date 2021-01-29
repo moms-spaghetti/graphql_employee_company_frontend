@@ -3,6 +3,8 @@ import React from "react";
 //components
 import EmployeesTable from "./components/EmployeesTable";
 import AddEmployee from "./components/AddEmployee";
+import AddCompany from "./components/AddCompany";
+import CompaniesTable from "./components/CompaniesTable";
 
 function App() {
   return (
@@ -22,8 +24,14 @@ function App() {
           Access the GraphiQL interface here to add data
         </a>
       </p>
-      <EmployeesTable />
-      <AddEmployee />
+      <div className="row-flex-container">
+        <EmployeesTable />
+        <AddEmployee />
+      </div>
+      <div className="row-flex-container">
+        <CompaniesTable />
+        <AddCompany />
+      </div>
     </div>
   );
 }

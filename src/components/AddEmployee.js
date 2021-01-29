@@ -41,13 +41,13 @@ const AddEmployee = () => {
 
   if (loading) return <p>loading employee data</p>;
   if (error) return <p>page error</p>;
-  if (data.allCompanies === []) return <p>no company data available</p>;
+  // if (data?.allCompanies.length < 1) return <h3>no company data available</h3>;
 
   return (
-    <>
+    <div>
       <h2>Add Employee</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="name">Company Name</label>
+        <label htmlFor="name">Employee Name</label>
         <input name="name" type="text" id="name" ref={register} required />
         <br />
         <label htmlFor="age">Age</label>
@@ -61,16 +61,22 @@ const AddEmployee = () => {
         <br />
         <label htmlFor="company">Company</label>
         <select type="select" ref={register} name="companyId" id="company">
-          {data.allCompanies.map((company) => (
-            <option key={company.id} value={company.id}>
-              {company.name}
+          {data?.allCompanies.length > 0 ? (
+            data.allCompanies.map((company) => (
+              <option key={company.id} value={company.id}>
+                {company.name}
+              </option>
+            ))
+          ) : (
+            <option disabled selected>
+              no company data available
             </option>
-          ))}
+          )}
         </select>
         <br />
         <input type="submit" />
       </form>
-    </>
+    </div>
   );
 };
 

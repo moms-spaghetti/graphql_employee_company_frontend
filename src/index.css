@@ -16,7 +16,10 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 50vw;
+  max-width: 500px;
+  min-width: 300px;
   text-transform: capitalize;
+  margin-right: 1rem;
 }
 
 td,
@@ -34,5 +37,19 @@ tr:nth-child(even) {
 }
 
 label {
-  margin-right: 1rem;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+h2 {
+  margin-bottom: 0.5em;
+}
+
+select,
+option {
+  text-transform: capitalize;
+}
+
+.row-flex-container {
+  display: flex;
 }

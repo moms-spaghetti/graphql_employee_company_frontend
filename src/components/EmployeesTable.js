@@ -8,10 +8,10 @@ const EmployeesTable = () => {
 
   if (loading) return <p>loading employee data</p>;
   if (error) return <p>page error</p>;
-  if (data.allEmployees === []) return <p>no employee data available</p>;
+  if (data?.allEmployees.length < 1) return <h3>no employee data available</h3>;
 
   return (
-    <>
+    <div>
       <h2>Employee Table</h2>
       <table>
         <thead>
@@ -58,7 +58,7 @@ const EmployeesTable = () => {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 

@@ -37,8 +37,34 @@ const ALL_COMPANIES = gql`
     allCompanies {
       id
       name
+      totalEmployees
     }
   }
 `;
 
-export { ALL_EMPLOYEES, DELETE_EMPLOYEE, ADD_EMPLOYEE, ALL_COMPANIES };
+const ADD_COMPANY = gql`
+  mutation AddCompany($name: String!, $totalEmployees: Int!) {
+    addCompany(name: $name, totalEmployees: $totalEmployees) {
+      id
+      name
+      totalEmployees
+    }
+  }
+`;
+
+const DELETE_COMPANY = gql`
+  mutation DeleteCompany($id: String!) {
+    deleteCompany(id: $id) {
+      id
+    }
+  }
+`;
+
+export {
+  ALL_EMPLOYEES,
+  DELETE_EMPLOYEE,
+  ADD_EMPLOYEE,
+  ALL_COMPANIES,
+  ADD_COMPANY,
+  DELETE_COMPANY,
+};
