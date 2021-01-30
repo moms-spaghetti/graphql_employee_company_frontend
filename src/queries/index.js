@@ -6,6 +6,7 @@ const ALL_EMPLOYEES = gql`
       id
       name
       age
+      companyId
       company {
         name
       }

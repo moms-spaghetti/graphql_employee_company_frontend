@@ -1,10 +1,11 @@
 import React from "react";
 import { ALL_COMPANIES, DELETE_COMPANY } from "../queries";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation, useApolloClient, gql } from "@apollo/client";
 
 const CompaniesTable = () => {
   const { loading, error, data } = useQuery(ALL_COMPANIES);
   const [deleteCompany] = useMutation(DELETE_COMPANY);
+  const client = useApolloClient();
 
   if (loading) return <p>loading company data</p>;
   if (error) return <p>page error</p>;
@@ -28,26 +29,40 @@ const CompaniesTable = () => {
               <td>{company.totalEmployees}</td>
               <td>
                 <button
-                  onClick={() =>
-                    deleteCompany({
-                      variables: { id: company.id },
-                      update(cache) {
-                        cache.modify({
-                          fields: {
-                            allCompanies(
-                              existingCompanies = [],
-                              { readField }
-                            ) {
-                              return existingCompanies.filter(
-                                (companyRef) =>
-                                  company.id !== readField("id", companyRef)
-                              );
-                            },
+                  onClick={() => {
+                    const data = client.readQuery({
+                      query: gql`
+                        query allEmployees {
+                          allEmployees {
+                            companyId
+                          }
+                        }
+                      `,
+                    });
+
+                    data.allEmployees.some(
+                      (item) => item.companyId === company.id
+                    )
+                      ? alert("cannot delete - other users are still linked")
+                      : deleteCompany({
+                          variables: { id: company.id },
+                          update(cache) {
+                            cache.modify({
+                              fields: {
+                                allCompanies(
+                                  existingCompanies = [],
+                                  { readField }
+                                ) {
+                                  return existingCompanies.filter(
+                                    (companyRef) =>
+                                      company.id !== readField("id", companyRef)
+                                  );
+                                },
+                              },
+                            });
                           },
                         });
-                      },
-                    })
-                  }
+                  }}
                 >
                   x
                 </button>
